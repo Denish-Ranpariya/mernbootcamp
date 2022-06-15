@@ -28,7 +28,6 @@ const userSchema = new Schema({
         trim: true,
     },
 
-    //TODO: come back here
     encry_password: {
         type: String,
         required: true,
