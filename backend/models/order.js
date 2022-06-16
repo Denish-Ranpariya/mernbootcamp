@@ -5,7 +5,7 @@ const { ObjectId } = Schema;
 
 const productCartSchema = new Schema({
     product: {
-        type: ObjectId("product"),
+        type: ObjectId,
         ref: "Product",
     },
     name: {
