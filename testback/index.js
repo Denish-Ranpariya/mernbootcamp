@@ -27,3 +27,19 @@ app.get("/hitesh", (req, res) => {
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
+
+const admin = (req, res) => {
+    res.send("This is admin dashboard");
+};
+
+const isAdmin = (req, res, next) => {
+    console.log("inside isAdmin function");
+    next();
+};
+
+const isLoggedIn = (req, res, next) => {
+    console.log("inside isLoggedIn function");
+    next();
+}
+
+app.get("/admin", isLoggedIn, isAdmin, admin);
