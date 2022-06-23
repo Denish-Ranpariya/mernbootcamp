@@ -6,7 +6,6 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const authRoutes = require("./routes/auth");
 
-
 const app = express();
 
 //middle-wares
@@ -33,4 +32,3 @@ app.use("/api", authRoutes);
 app.listen(port, () => {
     console.log(`App is running at ${port}.`);
 });
-
