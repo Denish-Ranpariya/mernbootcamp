@@ -9,7 +9,9 @@ const authRoutes = require("./routes/auth");
 const app = express();
 
 //middle-wares
-app.use(bodyParser.json(), cookieParser(), cors());
+app.use(bodyParser.json());
+app.use(cookieParser());
+app.use(cors());
 
 //DB connection
 mongoose.connect(process.env.DB_URI, {
