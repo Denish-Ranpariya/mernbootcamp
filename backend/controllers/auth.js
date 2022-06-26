@@ -1,7 +1,7 @@
 const User = require("../models/user");
 const { validationResult } = require("express-validator");
 var jwt = require('jsonwebtoken');
-var { expressjwt: jwt } = require("express-jwt");
+var expressjwt = require("express-jwt");
 
 exports.signup = (req, res) => {
 
@@ -29,8 +29,10 @@ exports.signup = (req, res) => {
 };
 
 exports.signout = (req, res) => {
+
+    res.clearCookie("token");
     res.json({
-        message: "User sign out",
+        message: "User signed out successfully",
     });
 };
 
@@ -45,16 +47,16 @@ exports.signin = (req, res) => {
             .json({ error: errors.array()[0].msg, param: errors.array()[0].param });
     }
 
-    User.findOne({ email }, (err, user) => {
-        if (err) {
+    User.findOne({ "email": email }, (err, user) => {
+        if (err || !user) {
             return res.status(400).json({
-                err: "Not able to find user with given email in DB",
+                "err": "Not able to find user with given email in DB",
             });
         }
 
         if (!user.authenticate(password)) {
             return res.status(401).json({
-                err: "Email and password do not match.",
+                "err": "Email and password do not match.",
             });
         }
 
@@ -70,3 +72,11 @@ exports.signin = (req, res) => {
     });
 }
 
+//protected routes
+exports.isSignedIn = expressjwt({
+    secret: process.env.SECRET,
+    userProperty: "auth"
+});
+
+
+//custom middlewares
