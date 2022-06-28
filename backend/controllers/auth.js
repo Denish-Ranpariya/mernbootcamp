@@ -78,6 +78,7 @@ exports.isSignedIn = expressjwt({
     userProperty: "auth"
 });
 
+//custom middlewares
 exports.isAutheticated = (req, res, next) => {
     let checker = req.profile && req.auth && req.profile._id === req.auth._id;
     if (!checker) {
@@ -98,4 +99,4 @@ exports.isAdmin = (req, res, next) => {
 };
 
 
-//custom middlewares
+
