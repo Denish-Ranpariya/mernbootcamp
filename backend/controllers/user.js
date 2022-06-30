@@ -14,6 +14,18 @@ exports.getUserbyId = (req, res, next, id) => {
 }
 
 exports.getUser = (req, res) => {
-    //TODO: get back here for password
-    return req.profile;
+    req.profile.salt = undefined;
+    req.profile.encry_password = undefined;
+    return res.json(req.profile);
+}
+
+exports.getAllUsers = (req, res) => {
+    User.find({}, (err, users) => {
+        if (err || !users) {
+            return res.status(400).json({
+                "error": "Not able to fetch all users!!"
+            });
+        }
+        return res.status(200).json(users);
+    })
 }
