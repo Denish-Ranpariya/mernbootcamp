@@ -37,5 +37,5 @@ app.use("/api", userRoutes);
 
 //routes
 app.listen(port, () => {
-    console.log(`App is running at ${port}.`);
+    console.log("APP IS RUNNING");
 });
