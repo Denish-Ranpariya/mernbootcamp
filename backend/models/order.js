@@ -15,7 +15,7 @@ const productCartSchema = new Schema({
     prize: Number,
 });
 
-const ProductCart = mongoose.Schema("ProductCart", productCartSchema);
+const ProductCart = mongoose.model("ProductCart", productCartSchema);
 
 const orderSchema = new Schema({
     products: [productCartSchema],
@@ -34,6 +34,6 @@ const orderSchema = new Schema({
 
 }, { timestamps: true });
 
-const Order = mongoose.Schema("Order", orderSchema);
+const Order = mongoose.model("Order", orderSchema);
 
 module.exports = { Order, ProductCart };
